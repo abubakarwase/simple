@@ -6,14 +6,19 @@ connectDB();
 
 // Route files
 const users = require("./routes/user.routes");
-
+const auth = require("./routes/auth.routes");
+const dotenv = require("dotenv");
 const app = express();
+
+// Load env vars
+dotenv.config({ path: "./config/config.env" });
 
 // req body parser
 app.use(express.json());
 
 // Mount routers
 app.use("/api/v1/users", users);
+app.use("/api/v1/auth", auth);
 
 const PORT = 5000;
 
