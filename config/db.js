@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const connectDB = async () => {
-  const conn = await mongoose.connect("mongodb://localhost:27017/simple-user", {
+  const conn = await mongoose.connect("mongodb://localhost:27017/TAXI", {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,

@@ -1,5 +1,5 @@
 const express = require("express");
-const { createUser , getUser, updateUser, deleteUser, getPosts} = require("../controllers/users");
+const { createPost, getPosts, getPost, updatePost, deletePost } = require("../controllers/posts");
   
 const router = express.Router({ mergeParams: true });
 
@@ -9,8 +9,8 @@ const { protect } = require("../middlewares/auth");
 // all of our routes now use these two middlewares
 router.use(protect);
 
-router.route("/").post(createUser);
-router.route("/:id").get(getUser).put(updateUser).delete(deleteUser);
-router.route("/:id/posts").get(getPosts)
+router.route("/user/:userId").post(createPost).get(getPosts);
+router.route("/:postId").get(getPost).put(updatePost).delete(deletePost);
+
 
 module.exports = router;

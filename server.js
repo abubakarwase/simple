@@ -1,5 +1,9 @@
 const express = require("express");
 const connectDB = require("./config/db");
+const redis = require("redis");
+const axios = require("axios");
+const dotenv = require("dotenv");
+const app = express();
 
 // Connect to Database
 connectDB();
@@ -7,8 +11,7 @@ connectDB();
 // Route files
 const users = require("./routes/user.routes");
 const auth = require("./routes/auth.routes");
-const dotenv = require("dotenv");
-const app = express();
+const post = require("./routes/post.routes");
 
 // Load env vars
 dotenv.config({ path: "./config/config.env" });
@@ -19,8 +22,12 @@ app.use(express.json());
 // Mount routers
 app.use("/api/v1/users", users);
 app.use("/api/v1/auth", auth);
+app.use("/api/v1/post", post);
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
+const PORTREDIS = process.env.PORTREDIS || 6379;
+
+const redisClient = redis.createClient(PORTREDIS)
 
 const server = app.listen(
     PORT,
